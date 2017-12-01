@@ -1,6 +1,6 @@
 {
   "name": "tcomb-json-schema-theme",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Transforms a JSON Schema and them to a tcomb type",
   "main": "index.js",
   "files": [

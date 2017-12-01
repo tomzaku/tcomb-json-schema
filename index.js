@@ -15,6 +15,7 @@ function and(f, g) {
 
 var types = {
   string: function(s) {
+    let type = t.String;
     if (s.hasOwnProperty('enum')) {
       if (t.Array.is(s['enum'])) {
         return t.enums.of(s['enum']);
@@ -40,19 +41,32 @@ var types = {
         );
       }
     }
+    
     if (s.hasOwnProperty('format')) {
-      t.assert(
-        formats.hasOwnProperty(s.format),
-        '[tcomb-json-schema] Missing format ' +
-          s.format +
-          ', use the (format, predicate) API'
-      );
+      switch(s.format){
+        case 'date': 
+        case 'date-time':
+        case 'time': {
+          type = t.Date;
+          break;
+        }
+      }
+      // t.assert(
+      //   formats.hasOwnProperty(s.format),
+      //   '[tcomb-json-schema] Missing format ' +
+      //     s.format +
+      //     ', use the (format, predicate) API'
+      // );
       if (t.isType(formats[s.format])) {
         return formats[s.format];
       }
-      predicate = and(predicate, formats[s.format]);
+      // predicate = and(predicate, formats[s.format]);
+      // predicate = and(predicate, t.Date);
+      // predicate = t.Date;
+      
     }
-    return predicate ? t.subtype(t.String, predicate) : t.String;
+    // return predicate ? t.subtype(t.String, predicate) : t.String;
+    return predicate ? t.subtype(type, predicate) : type;
   },
 
   number: function(s) {
@@ -137,8 +151,24 @@ var types = {
 };
 
 var registerTypes = {};
-
+var TRANSFORM_ORIGIN = null;
 function transform(s) {
+  if(!TRANSFORM_ORIGIN) TRANSFORM_ORIGIN = s;
+  if (s.$ref) {
+    let paths = s.$ref.split('/');
+    const goToRefPath = TRANSFORM_ORIGIN
+    paths.map((namePath)=> {
+      if(namePath === '#'){
+        // goToRefPath = schema
+      } else {
+        goToRefPath = goToRefPath[namePath]
+      }
+    })
+    s = {
+      ...s,
+      ...goToRefPath
+    }
+  }
   t.assert(t.Object.is(s));
   if (!s.hasOwnProperty('type')) {
     return t.Any;

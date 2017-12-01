@@ -1,7 +1,7 @@
 {
-  "name": "tcomb-json-schema",
-  "version": "0.3.2",
-  "description": "Transforms a JSON Schema to a tcomb type",
+  "name": "tcomb-json-schema-theme",
+  "version": "0.0.1",
+  "description": "Transforms a JSON Schema and them to a tcomb type",
   "main": "index.js",
   "files": ["index.js", "util.js"],
   "scripts": {
@@ -12,17 +12,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gcanti/tcomb-json-schema.git"
+    "url": "https://github.com/tomzaku/tcomb-json-schema.git"
   },
   "author": "Giulio Canti <giulio.canti@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/gcanti/tcomb-json-schema/issues"
+    "url": "https://github.com/tomzaku/tcomb-json-schema/issues"
   },
-  "homepage": "https://github.com/gcanti/tcomb-json-schema",
+  "homepage": "https://github.com/tomzaku/tcomb-json-schema",
   "dependencies": {
     "fcomb": "^0.1.0",
-    "tcomb": "^3.0.0"
+    "tcomb": "^3.0.0",
+    "react-native-simple-radio-button": "^2.6.2",
+    "react-native-vector-icons": "^4.4.0"
   },
   "devDependencies": {
     "eslint": "^4.7.2",

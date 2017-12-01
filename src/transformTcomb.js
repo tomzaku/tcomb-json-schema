@@ -3,8 +3,6 @@
 var t = require('tcomb');
 var fcomb = require('fcomb');
 var util = require('./util');
-// var optionGenerate = require('./src/optionGenerate');
-import optionGenerate from './optionGenerate'
 var SchemaType = t.enums.of(
   'null string number integer boolean object array',
   'SchemaType'
